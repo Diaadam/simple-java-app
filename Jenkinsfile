@@ -1,22 +1,23 @@
-node{
-    git:branch: 'main', url: 'https://github.com/Diaadam/simple-java-app.git'
-    stage('build'){
-        
+node {
+    // checkout repository
+    git branch: 'main', url: 'https://github.com/Diaadam/simple-java-app.git'
+
+    stage('build') {
         try {
-        sh 'echo "Building the application..."'
+            sh 'echo "Building the application..."'
         } catch (Exception e) {
-            sh'echo "Error during build stage"'
+            sh 'echo "Error during build stage"'
             throw e
         }
     }
-    stage('test'){
-        if(env.BRANCH_NAME == 'feature'){
-            
+
+    stage('test') {
+        if (env.BRANCH_NAME == 'feature') {
             sh 'echo "Running tests..."'
-           
         } else {
             sh 'echo "Skipping tests for non-feature branch"'
         }
+    }
 }
 
 
